@@ -6,7 +6,7 @@ const authenticate = (req, res, next) => {
         const decode = jwt.verify(token, "toi-yeu-vy-3000");
         console.log(decode)
         if (decode) {
-            req.user = decode //??
+            req.user = decode //gửi user lên
             return next()
         }else{
             res.status(401).send("Bạn chưa đăng nhập")

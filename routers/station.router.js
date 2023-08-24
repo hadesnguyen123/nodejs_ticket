@@ -7,11 +7,11 @@ const { authorize } = require('../middlewares/auth/authorize')
 
 const stationRouter = express.Router()
 
-stationRouter.post("/", authenticate, authorize, createStation)
+stationRouter.post("/", authenticate, authorize(['admin', 'super_admin']), createStation)
 stationRouter.get("/", getAllStation)
 stationRouter.get("/:id", getDetailStation)
-stationRouter.put("/:id", authenticate, checkExist(Station), updateStation)
-stationRouter.delete("/:id", authenticate, checkExist(Station), deleteStation)
+stationRouter.put("/:id", authenticate, authorize(['admin', 'super_admin']), checkExist(Station), updateStation)
+stationRouter.delete("/:id", authenticate, authorize(['admin', 'super_admin']), checkExist(Station), deleteStation)
 
 module.exports = {
     stationRouter
